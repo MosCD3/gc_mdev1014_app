@@ -39,13 +39,13 @@ namespace firstapp
                         case CognitoResult.PasswordRequirementsFailed:
                             Debug.WriteLine("Password requirment failed");
                             //responseJson = "{\"error\":\"true\",\"message\":\"Pass_Req_Failed\"}";
-                            funcReply = ServerReplyStatus.Success;
+                            funcReply = ServerReplyStatus.Fail;
                             break;
                         case CognitoResult.UserNameAlreadyUsed:
 
                             Debug.WriteLine("Email exists");
                             //responseJson = "{\"error\":\"true\",\"message\":\"Email_Exist\"}";
-                            funcReply = ServerReplyStatus.Success;
+                            funcReply = ServerReplyStatus.Fail;
                             break;
                         default:
                             Debug.WriteLine($"strange error: {responseCognito.Error}");

@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using firstapp.ENUMS;
@@ -8,7 +11,7 @@ using Xamarin.Forms;
 
 namespace firstapp.ViewModels
 {
-    public class RegisterPageVM
+    public class RegisterPageVM : BaseVM
     {
         public ICommand SignUpCommand => new Command(SignUpClicked);
         public string UserName { get; set; }
@@ -18,9 +21,10 @@ namespace firstapp.ViewModels
 
         public RegisterPageVM()
         {
+            IsBusy = true;
         }
 
-        async  void SignUpClicked()
+        async void SignUpClicked()
         {
             Debug.WriteLine($"am sign up clicked: username:{UserName}, password:{Password}");
             var _user = new UserAuthInfoObject

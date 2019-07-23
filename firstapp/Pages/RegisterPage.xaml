@@ -14,6 +14,7 @@
             </StackLayout>
             <StackLayout Grid.Row="2" Padding="20">
                 <Button Text="Sign Up" BackgroundColor="Maroon" TextColor="White" Padding="10" Command="{Binding SignUpCommand}" />
+                <ActivityIndicator  IsRunning="{Binding IsBusy}" Margin="20" />
             </StackLayout>
         </Grid>
     </ContentPage.Content>
