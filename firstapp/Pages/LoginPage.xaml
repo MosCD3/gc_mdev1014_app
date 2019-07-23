@@ -13,8 +13,8 @@
             </StackLayout>
             <StackLayout Grid.Row="2" Padding="20">
                 <Button Text="Sign In" BackgroundColor="Maroon" TextColor="White" Padding="10" Command="{Binding SigninCommand}" />
+                <ActivityIndicator  IsRunning="{Binding IsBusy}" Margin="20" />
             </StackLayout>
-            <ActivityIndicator IsEnabled="true"/>
         </Grid>
     </ContentPage.Content>
 </local:BasePage>
