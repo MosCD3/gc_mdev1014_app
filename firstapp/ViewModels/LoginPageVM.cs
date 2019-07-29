@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using firstapp.ENUMS;
 using firstapp.Models;
+using firstapp.Tools;
 using Xamarin.Forms;
 
 namespace firstapp.ViewModels
@@ -24,11 +25,6 @@ namespace firstapp.ViewModels
             set { SetValue(ref _Password, value); }
         }
 
-
-
-        private App MainApp = Application.Current as App;
-
-
         public ICommand SigninCommand => new Command(SignInClicked);
 
         private ServerConnect serviceConnect => new ServerConnect();
@@ -38,6 +34,32 @@ namespace firstapp.ViewModels
         }
 
         async public void SignInClicked()
+        {
+            CheckData();
+
+        }
+
+        async void CheckData()
+        {
+            //Checking Email input
+            if (!StringOperations.ValidateEmailInput(Username))
+            {
+                await MainApp.MainPage.DisplayAlert("Error!", "Please enter valid email", "ok");
+                return;
+            }
+
+            //checking the password
+            var result = StringOperations.BasicValidation(Password);
+            if (result != null)
+            {
+                await MainApp.MainPage.DisplayAlert("Error!", result, "ok");
+                return;
+            }
+
+            ContinueSignIn();
+        }
+
+        async void ContinueSignIn()
         {
             Debug.WriteLine($"check against username:{Username}, password:{Password}");
             var _user = new UserAuthInfoObject
@@ -52,12 +74,25 @@ namespace firstapp.ViewModels
 
             IsBusy = false;
 
-            if (!(result == ServerReplyStatus.Success))
+            switch (result)
             {
-                await MainApp.MainPage.DisplayAlert("Error!", "Something went wrong", "Ok");
+                case ServerReplyStatus.Success:
+                    MainApp.OnLogin();
+                    break;
+                case ServerReplyStatus.NotConfirmed:
+                    await MainApp.MainPage.DisplayAlert("Error!", "Email not confirmed, \nPlease check your email to confirm your account", "Ok");
+                    break;
+                case ServerReplyStatus.InvalidPassword:
+                    await MainApp.MainPage.DisplayAlert("Error!", "Invalid password!", "Ok");
+                    break;
+                case ServerReplyStatus.UserNotFound:
+                    await MainApp.MainPage.DisplayAlert("Error!", "Username not found!", "Ok");
+                    break;
+                default:
+                    await MainApp.MainPage.DisplayAlert("Error!", "Something went wrong", "Ok");
+                    break;
             }
-            else MainApp.OnLogin();
-
+           
         }
     }
 }

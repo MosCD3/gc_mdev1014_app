@@ -9,8 +9,10 @@
             </StackLayout>
             <StackLayout Grid.Row="1" VerticalOptions="Center" Padding="20">
                 <Entry Placeholder="User Email" Keyboard="Email" Text="{Binding UserName, Mode=TwoWay}" />
+                
+                <Label Text="Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character" Margin="0,20,0,2"/>
                 <Entry Placeholder="Password" Keyboard="Email" Text="{Binding Password, Mode=TwoWay}" />
-                <Entry Placeholder="Verify Password" Keyboard="Email" Text="{Binding PasswordV, Mode=TwoWay}" />
+                <Entry Placeholder="Verify Password" Keyboard="Email" Text="{Binding PasswordVerif, Mode=TwoWay}" />
             </StackLayout>
             <StackLayout Grid.Row="2" Padding="20">
                 <Button Text="Sign Up" BackgroundColor="Maroon" TextColor="White" Padding="10" Command="{Binding SignUpCommand}" />

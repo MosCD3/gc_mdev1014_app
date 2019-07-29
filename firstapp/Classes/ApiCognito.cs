@@ -88,7 +88,7 @@ namespace firstapp
 
                 else
                 {
-                    /*
+
                     Debug.WriteLine($"From:{this.GetType().Name},Login Success ======> ");
                     Debug.WriteLine($"username:{userName}");
                     Debug.WriteLine($"password:{password}");
@@ -98,7 +98,7 @@ namespace firstapp
                     Debug.WriteLine($"TokenIssued:{user.SessionTokens.IssuedTime}");
                     Debug.WriteLine($"Expires:{user.SessionTokens.ExpirationTime}");
                     Debug.WriteLine($"SessionId:{context.SessionID}");
-                    */
+                   
                     return new SignInContext(CognitoResult.Ok)
                     {
                         //User = user,

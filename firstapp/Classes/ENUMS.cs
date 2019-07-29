@@ -5,6 +5,11 @@ namespace firstapp.ENUMS
     {
         Success,
         Fail,
+        UserNameAlreadyUsed,
+        PasswordRequirementsFailed,
+        NotConfirmed,
+        InvalidPassword,
+        UserNotFound,
         Unknown
     }
     public enum AuthType

@@ -39,13 +39,13 @@ namespace firstapp
                         case CognitoResult.PasswordRequirementsFailed:
                             Debug.WriteLine("Password requirment failed");
                             //responseJson = "{\"error\":\"true\",\"message\":\"Pass_Req_Failed\"}";
-                            funcReply = ServerReplyStatus.Fail;
+                            funcReply = ServerReplyStatus.PasswordRequirementsFailed;
                             break;
                         case CognitoResult.UserNameAlreadyUsed:
 
                             Debug.WriteLine("Email exists");
                             //responseJson = "{\"error\":\"true\",\"message\":\"Email_Exist\"}";
-                            funcReply = ServerReplyStatus.Fail;
+                            funcReply = ServerReplyStatus.UserNameAlreadyUsed;
                             break;
                         default:
                             Debug.WriteLine($"strange error: {responseCognito.Error}");
@@ -78,17 +78,17 @@ namespace firstapp
                         case CognitoResult.NotConfirmed:
                             Debug.WriteLine($"From:{this.GetType().Name},Email not confirmed");
                             //responseJson = "{\"error\":\"true\",\"message\":\"Email_Not_Activated\"}";
-                            funcReply = ServerReplyStatus.Fail;
+                            funcReply = ServerReplyStatus.NotConfirmed;
                             break;
                         case CognitoResult.InvalidPassword:
                             Debug.WriteLine($"From:{this.GetType().Name},Invalid Password");
                             //responseJson = "{\"error\":\"true\",\"message\":\"Password_Mismatch\"}";
-                            funcReply = ServerReplyStatus.Fail;
+                            funcReply = ServerReplyStatus.InvalidPassword;
                             break;
                         case CognitoResult.UserNotFound:
                             Debug.WriteLine($"From:{this.GetType().Name},Email not found");
                             //responseJson = "{\"error\":\"true\",\"message\":\"Email_Not_Exist\"}";
-                            funcReply = ServerReplyStatus.Fail;
+                            funcReply = ServerReplyStatus.UserNotFound;
                             break;
                         default:
                             Debug.WriteLine($"strange error: {responseCognito.Error}");

@@ -26,6 +26,7 @@
     <Folder Include="Services\" />
     <Folder Include="Classes\" />
     <Folder Include="Models\" />
+    <Folder Include="Tools\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Remove="Pages\AfterLoginPageDetail.xaml" />

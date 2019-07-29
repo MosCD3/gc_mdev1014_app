@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-
+using Xamarin.Forms;
 
 namespace firstapp
 {
@@ -17,6 +17,7 @@ namespace firstapp
             set { SetValue(ref _IsBusy, value); }
         }
 
+        protected App MainApp = Application.Current as App;
 
         public BaseVM()
         {
