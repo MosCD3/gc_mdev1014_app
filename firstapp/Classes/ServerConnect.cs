@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using firstapp.ENUMS;
 using firstapp.Models;
+using Newtonsoft.Json;
 
 namespace firstapp
 {
     public class ServerConnect
     {
         public IApiCognito AuthApi => new ApiCognito();
+        //private HttpResponseMessage connectionResponse;
 
         public ServerConnect()
         {
@@ -99,9 +103,65 @@ namespace firstapp
                     break;
             }
 
-           
+
 
             return funcReply;
+        }
+
+
+
+        public async Task<bool> ConnectApi(object _sentObject)
+        {
+
+
+            //var returnMessage = ServerReplyStatus.Unknown;
+
+            var responseMessage = false;
+
+            string the_uri;
+            string jsonObject = JsonConvert.SerializeObject(_sentObject);
+            var content = new StringContent(jsonObject, Encoding.UTF8, "application/json");
+
+            the_uri = Keys.Aws_Resource_Folder + Keys.Aws_Resource_SavePet;
+
+            Debug.WriteLine("//Connected To Server/Device with body:" + jsonObject + "\nWith URI:" + the_uri);
+
+            using (HttpClient _client = new HttpClient())
+            {
+                try
+                {
+                    //this is equivilant to adding "Authorization: 'ID Token'" in the request header 
+                    //_client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(MyApp.Session.IdToken);
+
+                    //Post actio nere *****
+                   var connectionResponse = await _client.PostAsync(the_uri, content);
+                    //End of post action
+
+                    if (connectionResponse.IsSuccessStatusCode)
+                    {
+                        Debug.WriteLine($"//Connection success, Status code:{connectionResponse.StatusCode}");
+
+                        //isConnectionError = false;
+                        //returnMessage = ServerReplyStatus.Success;
+                        responseMessage = true;
+                    }
+                    else
+                    {
+                        Debug.WriteLine($"//Connection failed, Status code:{connectionResponse.StatusCode}");
+                        //isConnectionError_Msg = connectionResponse.StatusCode.ToString();
+                        //isConnectionError = true;
+                        //returnMessage = ServerReplyStatus.Fail;
+                        responseMessage = false;
+                    }
+                }
+                catch (Exception e)
+                {
+                    //isConnectionError = true;
+                    Debug.WriteLine($"//From {this.GetType().Name}, exception in connect:{e.Message}");
+                    responseMessage = false;
+                }
+            }
+            return responseMessage;
         }
     }
 }

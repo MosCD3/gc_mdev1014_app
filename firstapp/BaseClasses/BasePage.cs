@@ -28,6 +28,10 @@ namespace firstapp
             {
                 BindingContext = new RegisterPageVM();
             }
+            else if (this.GetType() == typeof(AddPet))
+            {
+                BindingContext = new AddPetVM();
+            }
 
         }
     }

@@ -16,5 +16,8 @@ namespace firstapp
         //Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character:
         public static string passwordRegex = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$";
 
+        //AWS related keys
+        public static string Aws_Resource_Folder = "https://qdgbfsrabc.execute-api.ca-central-1.amazonaws.com/dev";
+        public static string Aws_Resource_SavePet = "/pet-save";
     }
 }

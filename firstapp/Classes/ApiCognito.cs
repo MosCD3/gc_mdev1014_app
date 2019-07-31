@@ -17,6 +17,7 @@ using Amazon.Runtime;
 using System.Threading.Tasks;
 using System.Diagnostics;
 using firstapp.ENUMS;
+using Xamarin.Forms;
 
 namespace firstapp
 {
@@ -98,8 +99,9 @@ namespace firstapp
                     Debug.WriteLine($"TokenIssued:{user.SessionTokens.IssuedTime}");
                     Debug.WriteLine($"Expires:{user.SessionTokens.ExpirationTime}");
                     Debug.WriteLine($"SessionId:{context.SessionID}");
-                   
-                    return new SignInContext(CognitoResult.Ok)
+
+
+                    var _sessionData =  new SignInContext(CognitoResult.Ok)
                     {
                         //User = user,
                         UserName = userName,
@@ -111,6 +113,12 @@ namespace firstapp
                         Expires = user.SessionTokens.ExpirationTime,
                         SessionId = context.SessionID
                     };
+
+                    var myApp = Application.Current as App;
+                    myApp.SetSessionData(_sessionData);
+
+                    return _sessionData;
+
                 }
             }
             catch (UserNotConfirmedException)

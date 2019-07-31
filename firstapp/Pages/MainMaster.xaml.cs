@@ -32,5 +32,11 @@ namespace firstapp
             myMaster.IsPresented = false;
 
         }
+
+        void AddPets_Handle_Clicked(object sender, System.EventArgs e)
+        {
+            myMaster.Detail = new NavigationPage(new AddPet());
+            myMaster.IsPresented = false;
+        }
     }
 }

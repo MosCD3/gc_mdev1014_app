@@ -11,16 +11,23 @@ namespace firstapp
             InitializeComponent();
 
             //MainPage = new MainPage();
-            MainPage = new NavigationPage(new MainPage());
+            if (Properties.ContainsKey("Username"))
+                OnLogin();
+            else
+                MainPage = new NavigationPage(new MainPage());
         }
 
         public void OnLogin()
         {
-            MainPage =  new AfterLoginPage();
+            MainPage = new AfterLoginPage();
 
         }
-        public void OnLogout()
+        async public void OnLogout()
         {
+            Properties.Remove("Username");
+            Properties.Remove("Password");
+            await SavePropertiesAsync();
+
             MainPage = new NavigationPage(new MainPage());
         }
         protected override void OnStart()
@@ -36,6 +43,15 @@ namespace firstapp
         protected override void OnResume()
         {
             // Handle when your app resumes
+        }
+
+
+        public void SetSessionData(SignInContext _sessionData)
+        {
+
+            Properties["Username"] = _sessionData.UserName;
+            Properties["Password"] = _sessionData.UserPassword;
+            SavePropertiesAsync();
         }
     }
 }
