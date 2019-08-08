@@ -97,5 +97,10 @@ namespace firstapp.Tools
             }
             return false;
         }
+
+        public static string GenerateID()
+        {
+            return Guid.NewGuid().ToString("N");
+        }
     }
 }

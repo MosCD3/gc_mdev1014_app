@@ -27,7 +27,6 @@ namespace firstapp.ViewModels
 
         public ICommand SigninCommand => new Command(SignInClicked);
 
-        private ServerConnect serviceConnect => new ServerConnect();
         public LoginPageVM()
         {
             PH_Title = "Login Page";
@@ -56,43 +55,9 @@ namespace firstapp.ViewModels
                 return;
             }
 
-            ContinueSignIn();
+            ContinueSignIn(Username,Password);
         }
 
-        async void ContinueSignIn()
-        {
-            Debug.WriteLine($"check against username:{Username}, password:{Password}");
-            var _user = new UserAuthInfoObject
-            {
-                Email = Username,
-                Password = Password,
-                AuthType = AuthType.SignIn,
-            };
 
-            IsBusy = true;
-            var result = await serviceConnect.Connect(_user);
-
-            IsBusy = false;
-
-            switch (result)
-            {
-                case ServerReplyStatus.Success:
-                    MainApp.OnLogin();
-                    break;
-                case ServerReplyStatus.NotConfirmed:
-                    await MainApp.MainPage.DisplayAlert("Error!", "Email not confirmed, \nPlease check your email to confirm your account", "Ok");
-                    break;
-                case ServerReplyStatus.InvalidPassword:
-                    await MainApp.MainPage.DisplayAlert("Error!", "Invalid password!", "Ok");
-                    break;
-                case ServerReplyStatus.UserNotFound:
-                    await MainApp.MainPage.DisplayAlert("Error!", "Username not found!", "Ok");
-                    break;
-                default:
-                    await MainApp.MainPage.DisplayAlert("Error!", "Something went wrong", "Ok");
-                    break;
-            }
-           
-        }
     }
 }

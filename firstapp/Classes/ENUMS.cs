@@ -1,6 +1,12 @@
 ﻿using System;
 namespace firstapp.ENUMS
 {
+    public enum Pages
+    {
+        Landing,
+        AfterLogin,
+        RefreshSession
+    }
     public enum ServerReplyStatus
     {
         Success,

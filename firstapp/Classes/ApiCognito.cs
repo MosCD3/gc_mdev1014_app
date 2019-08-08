@@ -18,6 +18,7 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 using firstapp.ENUMS;
 using Xamarin.Forms;
+using firstapp.Interfaces;
 
 namespace firstapp
 {
@@ -115,7 +116,7 @@ namespace firstapp
                     };
 
                     var myApp = Application.Current as App;
-                    myApp.SetSessionData(_sessionData);
+                    myApp.Session.PopulateSession(_sessionData);
 
                     return _sessionData;
 

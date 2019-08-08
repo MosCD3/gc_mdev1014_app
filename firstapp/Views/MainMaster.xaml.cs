@@ -28,7 +28,7 @@ namespace firstapp
         }
         void Inv_Handle_Clicked(object sender, System.EventArgs e)
         {
-            myMaster.Detail = new NavigationPage(new InventoriesPage());
+            myMaster.Detail = new NavigationPage(new PetsPage());
             myMaster.IsPresented = false;
 
         }

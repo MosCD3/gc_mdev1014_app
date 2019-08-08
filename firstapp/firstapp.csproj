@@ -18,15 +18,17 @@
     <PackageReference Include="AWSSDK.Core" Version="3.3.103.11" />
     <PackageReference Include="AWSSDK.SecurityToken" Version="3.3.101.29" />
     <PackageReference Include="AWSSDK.Extensions.CognitoAuthentication" Version="0.9.4" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.5.0" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Pages\" />
+    <Folder Include="Views\" />
     <Folder Include="ViewModels\" />
     <Folder Include="BaseClasses\" />
     <Folder Include="Services\" />
     <Folder Include="Classes\" />
     <Folder Include="Models\" />
     <Folder Include="Tools\" />
+    <Folder Include="Interfaces\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Remove="Pages\AfterLoginPageDetail.xaml" />

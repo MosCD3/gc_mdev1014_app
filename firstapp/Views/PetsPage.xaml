@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<local:BasePage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:local="clr-namespace:firstapp" x:Class="firstapp.PetsPage">
+    <ContentPage.Content>
+        <StackLayout>
+                <ActivityIndicator  IsRunning="{Binding IsBusy}" Margin="20" />
+            <ListView ItemsSource="{Binding ItemsList}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding PetName}" Detail="{Binding PetBreed}"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</local:BasePage>

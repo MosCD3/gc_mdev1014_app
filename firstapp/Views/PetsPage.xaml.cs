@@ -5,9 +5,9 @@ using Xamarin.Forms;
 
 namespace firstapp
 {
-    public partial class InventoriesPage : ContentPage
+    public partial class PetsPage : BasePage
     {
-        public InventoriesPage()
+        public PetsPage()
         {
             InitializeComponent();
         }

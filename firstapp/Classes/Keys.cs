@@ -19,5 +19,6 @@ namespace firstapp
         //AWS related keys
         public static string Aws_Resource_Folder = "https://qdgbfsrabc.execute-api.ca-central-1.amazonaws.com/dev";
         public static string Aws_Resource_SavePet = "/pet-save";
+        public static string Aws_Resource_PetsLoad = "/pets-load";
     }
 }

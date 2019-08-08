@@ -1,22 +1,27 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using firstapp.ENUMS;
+using firstapp.Interfaces;
 using firstapp.Models;
 using Newtonsoft.Json;
+using Xamarin.Forms;
 
 namespace firstapp
 {
     public class ServerConnect
     {
         public IApiCognito AuthApi => new ApiCognito();
+        private App MyApp = Application.Current as App;
         //private HttpResponseMessage connectionResponse;
 
         public ServerConnect()
         {
         }
+
 
         async public Task<ServerReplyStatus> Connect(UserAuthInfoObject _connectInfo)
         {
@@ -110,19 +115,19 @@ namespace firstapp
 
 
 
-        public async Task<bool> ConnectApi(object _sentObject)
+        public async Task<ServerResponseObject> ConnectApi(object _sentObject,string _endPoint)
         {
 
 
             //var returnMessage = ServerReplyStatus.Unknown;
 
-            var responseMessage = false;
+            var responseMessage = new ServerResponseObject();
 
             string the_uri;
             string jsonObject = JsonConvert.SerializeObject(_sentObject);
             var content = new StringContent(jsonObject, Encoding.UTF8, "application/json");
 
-            the_uri = Keys.Aws_Resource_Folder + Keys.Aws_Resource_SavePet;
+            the_uri = Keys.Aws_Resource_Folder + _endPoint;
 
             Debug.WriteLine("//Connected To Server/Device with body:" + jsonObject + "\nWith URI:" + the_uri);
 
@@ -130,38 +135,33 @@ namespace firstapp
             {
                 try
                 {
-                    //this is equivilant to adding "Authorization: 'ID Token'" in the request header 
-                    //_client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(MyApp.Session.IdToken);
+                    _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(MyApp.Session.IdToken);
 
-                    //Post actio nere *****
                    var connectionResponse = await _client.PostAsync(the_uri, content);
-                    //End of post action
 
                     if (connectionResponse.IsSuccessStatusCode)
                     {
+                        
                         Debug.WriteLine($"//Connection success, Status code:{connectionResponse.StatusCode}");
-
-                        //isConnectionError = false;
-                        //returnMessage = ServerReplyStatus.Success;
-                        responseMessage = true;
+                        responseMessage.status = ServerReplyStatus.Success;
+                        responseMessage.data =  connectionResponse.Content.ReadAsStringAsync().Result; 
                     }
                     else
                     {
                         Debug.WriteLine($"//Connection failed, Status code:{connectionResponse.StatusCode}");
-                        //isConnectionError_Msg = connectionResponse.StatusCode.ToString();
-                        //isConnectionError = true;
-                        //returnMessage = ServerReplyStatus.Fail;
-                        responseMessage = false;
+                        responseMessage.status = ServerReplyStatus.Fail;
                     }
                 }
                 catch (Exception e)
                 {
-                    //isConnectionError = true;
                     Debug.WriteLine($"//From {this.GetType().Name}, exception in connect:{e.Message}");
-                    responseMessage = false;
+                    responseMessage.error = e.Message;
+                    responseMessage.status = ServerReplyStatus.Unknown;
                 }
             }
+
             return responseMessage;
         }
+
     }
 }

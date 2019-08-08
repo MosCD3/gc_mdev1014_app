@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using firstapp.ENUMS;
 
-namespace firstapp
+namespace firstapp.Interfaces
 {
 
     public class CognitoContext

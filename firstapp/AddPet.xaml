@@ -6,6 +6,7 @@
             <Entry Placeholder="Pet Breed" Text="{Binding Pet_Breed}"/>
             <Entry Placeholder="Pet Description" Text="{Binding Pet_Desc}"/>
             <Button Text="Add Pet" Command="{Binding AddPetCommand}" />
+             <ActivityIndicator  IsRunning="{Binding IsBusy}" Margin="20" />
         </StackLayout>
     </ContentPage.Content>
 </local:BasePage>

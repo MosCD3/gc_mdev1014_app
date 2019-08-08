@@ -4,8 +4,9 @@ namespace firstapp.Models
     public class Pet
     {
         public string PetID;
-        public string PetName;
-        public string PetBreed;
-        public string PetDesc;
+        public string UserID;
+        public string PetName { get; set; }
+        public string PetBreed { get; set; }
+        public string PetDesc { get; set; }
     }
 }
