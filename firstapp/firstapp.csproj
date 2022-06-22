@@ -13,7 +13,7 @@
   <ItemGroup>
     <PackageReference Include="Xamarin.Forms" Version="3.6.0.264807" />
     <PackageReference Include="Xamarin.Essentials" Version="1.0.1" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="AWSSDK.CognitoIdentityProvider" Version="3.3.102.32" />
     <PackageReference Include="AWSSDK.Core" Version="3.3.103.11" />
     <PackageReference Include="AWSSDK.SecurityToken" Version="3.3.101.29" />
